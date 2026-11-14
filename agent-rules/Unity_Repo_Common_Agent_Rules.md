@@ -29,7 +29,7 @@ C# 实现、UI 绑定和迁移按需读取 Coding Contract；普通磁盘任务�
 - 需要 Scene、Prefab、GameObject、Component、Console、Test、Build、Package 或 Screenshot truth 时，先用 `$unity-editor-ops` 确认项目、endpoint、实例和场景。
 - route、status、resource、Console、refresh、EditMode 和参数明确的普通调用由当前 lease owner 直接使用 CLI。
 - 只有具体操作无法由 CLI 有效承载、会显著污染主线上下文或需要专用 MCP 配置时，才按 Supervisor Workflow 创建 `unity_mcp` broker。
-- 项目别名与 endpoint 以 [[Knowledge/Tools/Unity_MCP_Multi_Project]] 为准；角色、写权和 lease 以 [[Knowledge/References/Unity_Supervisor_First_Agent_Workflow]] 为准。
+- 项目别名与 endpoint 以 [Unity_MCP_Multi_Project](Unity_MCP_Multi_Project.md) 为准；角色、写权和 lease 以 [Unity_Supervisor_First_Agent_Workflow](Unity_Supervisor_First_Agent_Workflow.md) 为准。
 
 ## Refresh And Compilation
 
@@ -53,4 +53,4 @@ C# 实现、UI 绑定和迁移按需读取 Coding Contract；普通磁盘任务�
 
 ## Documentation
 
-记忆结构与收尾以 [[Memory_Rules]] 为准。本文件不复制 Supervisor、MCP 或项目特定协议。
+记忆结构与收尾以 [Memory_Rules](Memory_Rules.md) 为准。本文件不复制 Supervisor、MCP 或项目特定协议。

@@ -28,4 +28,4 @@
 
 ## Scheduled Maintenance
 
-每日/月度操作、时间回执、自动化会话归档与定向提交统一见 [[Knowledge/References/Memory_Maintenance_Operations]]；调度提示词见 [[Knowledge/References/Memory_Vault_Daily_Monthly_Agent_Prompts]]。开发任务不加载这些流程。
+每日/月度操作、时间回执、自动化会话归档与定向提交统一见 `Memory_Maintenance_Operations`（未公开）；调度提示词见 `Memory_Vault_Daily_Monthly_Agent_Prompts`（未公开）。开发任务不加载这些流程。

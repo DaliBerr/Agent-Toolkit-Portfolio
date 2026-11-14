@@ -41,7 +41,7 @@ python -m unittest tests/test_safety_gates.py
 - [`Memory_Rules.md`](agent-rules/Memory_Rules.md) 与 [`Global_AGENTS.md`](agent-rules/Global_AGENTS.md)：跨会话共享记忆的分层（规则、Skill、项目文档、知识库、归档），每类信息只保留一个主源。
 - [`skills/lilith-repo-operator`](skills/lilith-repo-operator/)：按症状直达排障条目的索引，Agent 不必通读全部文档。
 
-规则文档里的 `[[...]]` 链接指向共享记忆库中的其他文件，记忆库本身含个人信息，没有公开。
+这些规则原本存放在一个跨会话共享的记忆库里，文档之间的引用已改成仓库内链接；记忆库其余部分含个人信息，没有公开，引用到的地方标为「未公开」。
 
 ## 3. 运行时 Agent 接口（试验性）：runtime-automation
 
@@ -76,3 +76,7 @@ pixelfx 与 Sprite Fusion 的原始代码按 MIT 许可使用，见 [`agent-art/
 | [Gameplay MCP](https://github.com/nowsprinting/gameplay-mcp) | 包体内嵌 MCP 服务 | 见原项目 |
 | [pixelfx](https://github.com/patch-gg/pixelfx) | 像素特效库 | MIT |
 | [Pixel Loom](https://github.com/yangsir2077/pixel-loom) | 分层像素工程编辑器（经 MCP 由 Agent 操作） | 见原项目 |
+
+## 许可
+
+本仓库以 [MIT](LICENSE) 许可发布。`agent-art/` 中基于 pixelfx 与 Sprite Fusion 改写的文件同时保留原作者的 MIT 版权声明（见 [`agent-art/PixelFX-MIT.txt`](agent-art/PixelFX-MIT.txt) 及各目录内的 LICENSE-PixelFX.txt）。

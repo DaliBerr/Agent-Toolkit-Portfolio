@@ -18,7 +18,7 @@
 ## Single-Writer And Unity Leases
 
 - 同一 checkout 同时仅一名写者；worker、tester 与主线串行交接写权。只读探索可并行。
-- 普通磁盘工作不连接 Unity、不建快照。Editor 只读先验路由，不因读取建快照；风险操作按 [[Knowledge/References/Unity_Repo_Common_Agent_Rules]] 执行。
+- 普通磁盘工作不连接 Unity、不建快照。Editor 只读先验路由，不因读取建快照；风险操作按 [Unity_Repo_Common_Agent_Rules](Unity_Repo_Common_Agent_Rules.md) 执行。
 - 主线记录当前 lease owner、项目、操作范围与安全证据；只有实际使用 Editor 风险操作时才需要 Unity lease，不为纯文档伪造 lease。
 - 常规 route/status/resource/Console/refresh/精确 EditMode 由 lease owner 用 unity-editor-ops；broker 不产生第二份 lease。
 - profile sandbox 可能被宿主权限覆盖，不能作为唯一保护；仍需路径边界、单写者和最终 diff。Agent 不进入 PlayMode，不运行 PlayMode tests，项目额外测试禁令同样适用。
@@ -28,7 +28,7 @@
 1. 主线明确任务与已有改动；按需选择独立探索、实现或验证工作。
 2. 给实际需要的角色发窄合同，串行授予/归还文件写权；已有回归足够时直接实现再验证。
 3. 实现后运行最窄验证；按失败归属修复，只有实际交接才更新所有权记录。
-4. 主线审查结果与边界，按 [[Memory_Rules#Memory Consistency Pass]] 同步长期新事实，人工验收明确列出。
+4. 主线审查结果与边界，按 [Memory_Rules § Memory Consistency Pass](Memory_Rules.md#memory-consistency-pass) 同步长期新事实，人工验收明确列出。
 
 ## Broker Requests
 
@@ -49,7 +49,7 @@
 
 角色由 agent_type 选择，task_name 只是标签。角色专用输入默认 fork_turns="none"；仅兼容且必要时扩大上下文。
 客户端/profile 改变后按需验证运行时元数据，不把子代理自报或任务名当作路由证明；既有有效证据可复用，不每次重跑烟测。
-路由无法证明时不冒充指定角色；主线可完成的工作继续，确实依赖指定角色的部分报告限制。排障见 [[Knowledge/Troubleshooting/Codex_Custom_Agent_Profile_Routing]]。
+路由无法证明时不冒充指定角色；主线可完成的工作继续，确实依赖指定角色的部分报告限制。排障见 `Codex_Custom_Agent_Profile_Routing`（未公开）。
 
 ## Stop Conditions
 

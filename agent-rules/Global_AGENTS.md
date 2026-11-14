@@ -29,13 +29,13 @@ Codex 内置记忆辅助回忆偏好和历史线索；必须执行的规则、�
 
 ## Topic Triggers
 
-- C# 实现、绑定、UI 或迁移：[[Knowledge/References/Unity_Repo_Common_Agent_Rules#Coding Contract]]；不因读取编码规则连接 Unity。
-- Editor 读取：[[Knowledge/Tools/Unity_MCP_Multi_Project]] 与 unity-editor-ops；需要路由，不因只读建立快照。
-- 序列化写入、refresh/import、Unity 测试或 Editor 状态变更：[[Knowledge/References/Unity_Repo_Common_Agent_Rules]]。
-- 监管角色、写权、lease：[[Knowledge/References/Unity_Supervisor_First_Agent_Workflow]]。
-- 有长期新信息需要写入、归档或显式记忆维护：[[Memory_Rules]]。普通只读问答、审查不自动重写被读取的记忆。
-- 其他主题按需查 [[Index]]；Agent 默认不进入 Editor PlayMode 或运行 PlayMode tests。
+- C# 实现、绑定、UI 或迁移：[Unity_Repo_Common_Agent_Rules § Coding Contract](Unity_Repo_Common_Agent_Rules.md#coding-contract)；不因读取编码规则连接 Unity。
+- Editor 读取：[Unity_MCP_Multi_Project](Unity_MCP_Multi_Project.md) 与 unity-editor-ops；需要路由，不因只读建立快照。
+- 序列化写入、refresh/import、Unity 测试或 Editor 状态变更：[Unity_Repo_Common_Agent_Rules](Unity_Repo_Common_Agent_Rules.md)。
+- 监管角色、写权、lease：[Unity_Supervisor_First_Agent_Workflow](Unity_Supervisor_First_Agent_Workflow.md)。
+- 有长期新信息需要写入、归档或显式记忆维护：[Memory_Rules](Memory_Rules.md)。普通只读问答、审查不自动重写被读取的记忆。
+- 其他主题按需查 `Index`（未公开）；Agent 默认不进入 Editor PlayMode 或运行 PlayMode tests。
 
 ## Closeout
 
-只同步本次变化影响的事实；数据破坏风险、可复用根因或正式入口变化写对应主源并补必要索引。普通查询不写记忆；需要写入时按 [[Memory_Rules#Memory Consistency Pass]] 检查本次修改范围。
+只同步本次变化影响的事实；数据破坏风险、可复用根因或正式入口变化写对应主源并补必要索引。普通查询不写记忆；需要写入时按 [Memory_Rules § Memory Consistency Pass](Memory_Rules.md#memory-consistency-pass) 检查本次修改范围。

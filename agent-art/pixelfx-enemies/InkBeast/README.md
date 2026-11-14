@@ -11,4 +11,4 @@ node tools/check.mjs 'critters/ink-beast-*'
 
 一次性动作的工具原始导出包含t=duration额外空帧。正式图集去掉该额外帧，仍保留死亡动作自身的透明末帧。打包时须按68个有效Rect处理，不将行末空白作为动画帧。
 
-正式图集在 `Assets/Art/Characters/Enemies/InkBeast/`，接入方式见 [异形兽](../../../../Docs/InkBeastEnemy.md)。预览地面不烘焙进素材，运行时沿用动态投影。MIT许可见本目录LICENSE-PixelFX.txt。
+正式图集在 `Assets/Art/Characters/Enemies/InkBeast/`，接入方式记录在《苍灵志》仓库文档中（未公开）。预览地面不烘焙进素材，运行时沿用动态投影。MIT许可见本目录LICENSE-PixelFX.txt。

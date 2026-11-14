@@ -31,7 +31,7 @@
 
 ## After Script Edits
 
-遵守 [[Knowledge/References/Unity_Repo_Common_Agent_Rules#Refresh And Compilation]]，不在路由文档重复刷新流程。
+遵守 [Unity_Repo_Common_Agent_Rules § Refresh And Compilation](Unity_Repo_Common_Agent_Rules.md#refresh-and-compilation)，不在路由文档重复刷新流程。
 
 ## Execute Code Roslyn Backend
 - If `execute_code` reports `Roslyn (Microsoft.CodeAnalysis) is not available`, MCPForUnity expects Roslyn DLLs under the target Unity repo at `Assets/Plugins/Roslyn/`.
