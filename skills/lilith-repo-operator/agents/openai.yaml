@@ -1,0 +1,4 @@
+interface:
+  display_name: "Lilith Repo Operator"
+  short_description: "Lilith repo workflow, docs, MCP, and delegation"
+  default_prompt: "Use $lilith-repo-operator to work safely inside the Lilith Unity repository."

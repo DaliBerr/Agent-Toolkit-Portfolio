@@ -1,0 +1,24 @@
+{
+  "name": "Vocalith.RuntimeAutomation.UGUI",
+  "rootNamespace": "Vocalith.RuntimeAutomation.UGUI",
+  "references": [
+    "Vocalith.RuntimeAutomation.Core",
+    "Newtonsoft.Json",
+    "Unity.TextMeshPro",
+    "Unity.ugui"
+  ],
+  "includePlatforms": [
+    "Editor",
+    "WindowsStandalone64"
+  ],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [
+    "UNITY_EDITOR || INCLUDE_COM_NOWSPRINTING_TEST_HELPER"
+  ],
+  "versionDefines": [],
+  "noEngineReferences": false
+}

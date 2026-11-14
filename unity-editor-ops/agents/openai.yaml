@@ -1,0 +1,4 @@
+interface:
+  display_name: "Unity Editor Ops"
+  short_description: "Run direct CLI-first Unity MCP operations safely"
+  default_prompt: "Use $unity-editor-ops to run a bounded CLI-first Unity Editor request, and use the broker only for a queued atomic escape-hatch operation."

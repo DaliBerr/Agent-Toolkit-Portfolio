@@ -1,0 +1,24 @@
+{
+  "name": "Vocalith.RuntimeAutomation.GameplayMcp",
+  "rootNamespace": "Vocalith.RuntimeAutomation.GameplayMcp",
+  "references": [
+    "Vocalith.RuntimeAutomation.Core",
+    "GameplayMcp",
+    "UniTask",
+    "Newtonsoft.Json"
+  ],
+  "includePlatforms": [
+    "Editor",
+    "WindowsStandalone64"
+  ],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [
+    "UNITY_EDITOR || INCLUDE_COM_NOWSPRINTING_TEST_HELPER"
+  ],
+  "versionDefines": [],
+  "noEngineReferences": false
+}

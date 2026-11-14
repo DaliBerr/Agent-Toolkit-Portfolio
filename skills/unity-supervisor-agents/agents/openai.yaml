@@ -1,0 +1,7 @@
+interface:
+  display_name: "Unity Supervisor Agents"
+  short_description: "On-demand Unity supervisor multi-agent workflow"
+  default_prompt: "Use $unity-supervisor-agents to run this very complex Unity task through the supervisor-first workflow."
+
+policy:
+  allow_implicit_invocation: true

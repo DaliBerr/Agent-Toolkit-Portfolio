@@ -1,0 +1,4 @@
+<linker>
+  <assembly fullname="Vocalith.RuntimeAutomation.GameplayMcp" preserve="all" />
+  <assembly fullname="Vocalith.RuntimeAutomation.Core" preserve="all" />
+</linker>

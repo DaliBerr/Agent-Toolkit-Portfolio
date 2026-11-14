@@ -1,0 +1,17 @@
+{
+  "name": "com.vocalith.runtime-automation",
+  "version": "0.1.0",
+  "displayName": "Vocalith Runtime Automation",
+  "description": "Reusable structured runtime automation, evidence, and visual validation contracts for Unity Development Players.",
+  "unity": "6000.0",
+  "author": {
+    "name": "Vocalith"
+  },
+  "dependencies": {
+    "com.cysharp.unitask": "2.3.3",
+    "com.nowsprinting.gameplay-mcp": "0.3.2",
+    "com.unity.inputsystem": "1.18.0",
+    "com.unity.nuget.newtonsoft-json": "3.2.2",
+    "com.unity.ugui": "2.0.0"
+  }
+}
