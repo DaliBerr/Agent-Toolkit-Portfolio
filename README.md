@@ -2,7 +2,7 @@
 
 我在 Unity 游戏开发中使用编程 Agent（Claude Code、Codex）时搭建的工具、规则和产出，主要服务于 2D 肉鸽构筑游戏《苍灵志》（[Lilith-Portfolio](https://github.com/DaliBerr/Lilith-Portfolio)）。
 
-目标是让 Agent 能安全地参与日常开发：读写编辑器不搞坏资源，测试不越界，多个 Agent 不互相覆盖，游戏能被 Agent 直接驱动验证，美术特效能由 Agent 以可编辑的方式产出。
+目标是让 Agent 能安全地参与日常开发：读写编辑器不搞坏资源，测试不越界，多个 Agent 不互相覆盖，游戏能被 Agent 直接驱动验证，改动有审查关卡，玩法系统按冻结的规格实现，美术特效能由 Agent 以可编辑的方式产出。
 
 > 作者口径：规则、协议与流程由我设计，代码大量借助 Agent 编写，并由我审查和验收。
 
@@ -14,9 +14,14 @@
 | [`agent-rules/`](agent-rules/) | 仓库 AGENTS 规则、Unity 通用安全规则、多 Agent 监管流程、记忆规则 | 序列化资源保护、测试边界、单写者、长期记忆分层 |
 | [`skills/`](skills/) | 仓库操作 Skill、监管 Skill | 让 Agent 按需加载项目规范和排障索引 |
 | [`runtime-automation/`](runtime-automation/) | 运行时自动化协议包（Unity UPM，约 1900 行 C#）、核心测试与协议文档 | 让 Agent 不借助 Computer Use、用结构化状态驱动游戏 |
+| [`editor-guards/`](editor-guards/) | Unity Editor 插件 SystemCallBlocker 与带种子的随机数生成器 | 拦截绕过统一随机数和日志模块的直接调用 |
+| [`balance-lab/`](balance-lab/) | 离线数值实验的方案概述（代码未公开） | 用模拟筛选数值候选，人工批准后才写入游戏 |
+| [`agent-specs/`](agent-specs/) | 敌人 AI 的执行规格与实现日志 | 让实现 Agent 按冻结的目标和验收条件推进 |
 | [`agent-art/`](agent-art/) | Agent 用 pixelfx 编写的特效与敌人动画源码、预览 | 让 Agent 产出可编辑、可复现的像素美术 |
 
 ## 1. 编辑器操作：unity-editor-ops
+
+起因：多个 Unity 项目并行使用 Codex、Claude Code 开发时，出现过 Agent 按编辑器未刷新的旧缓存保存 Prefab、覆盖了新加节点的问题。这个客户端就是为了让 Agent 的编辑器操作有统一的入口和限制。
 
 编辑器侧使用开源的 [MCP for Unity](https://github.com/CoplayDev/unity-mcp) 服务。`scripts/unity_ops.py` 是我的客户端：
 
@@ -54,7 +59,38 @@ python -m unittest tests/test_safety_gates.py
 
 《苍灵志》的适配层（玩家、战斗、地图、UI 的状态和动作提供者，约 4400 行）属于游戏代码，没有收录。当前进度见 [`docs/RuntimeAutomationCoverage.md`](runtime-automation/docs/RuntimeAutomationCoverage.md)：协议核心测试 9/9 通过，两种包体构建通过；教程章节还没有完成一次全程不看截图的独立包体验收。
 
-## 4. Agent 美术：agent-art
+## 4. 代码审查插件：editor-guards
+
+[`SystemCallBlocker.cs`](editor-guards/SystemCallBlocker.cs) 是《苍灵志》仓库里的 Unity Editor 插件，原样收录：
+
+- **扫描**：每次编译完成后扫描业务脚本，即将进入 Play 模式前再扫描一次。
+- **拦截**：直接调用 `System.Random`、`UnityEngine.Random` 或 `UnityEngine.Debug` 时，在控制台报出规则、文件、行号和替换建议；修正前不能进入 Play 模式。
+- **随机数**：须改用带种子的 [`Vocalith.Random`](editor-guards/Random.cs)（PCG32），这样 Agent 引入的问题可以按种子复现。
+- **日志**：须改用 `Vocalith.GameDebug`，它的调用在发行包里会被编译器去掉。
+
+它和第 2 节的 Prefab 快照、哈希比对规则一起，构成 Agent 改动后的审查关卡。详见 [`editor-guards/README.md`](editor-guards/README.md)。
+
+## 5. 离线数值实验：balance-lab
+
+目标是让 Demo 达到设定体验：有同类游戏经验的玩家约在第 3–4 次尝试通关，成功一局约 15 分钟。
+
+- **模拟**：实验室模拟两章 13 个战斗房和 2 个 Boss，从上千项可调参数里筛出少量候选。
+- **写入**：候选只写入隔离目录，经人工批准和 Unity 试运行后才会写入资源。
+- **审阅**：方案和实现由两个不同模型的 Agent 交叉审阅。
+
+实验室代码在私有的游戏仓库里，这里只放方案概述：[`balance-lab/README.md`](balance-lab/README.md)。
+
+## 6. 执行规格：agent-specs
+
+刷怪、敌人 AI 和房间生成三个系统，都是先写执行规格，再交给实现 Agent：
+
+- **规格内容**：写明目标、仓库现状、验收条件和禁止事项。
+- **不得改规格**：实现 Agent 不得修改规格，只能更新实现日志。
+- **遇到冲突**：发现冲突必须停下，写入日志的 Blockers，由我裁决。
+
+这里收录敌人 AI 那份规格和它的实现日志；按规格，六类小兵已经落地。详见 [`agent-specs/README.md`](agent-specs/README.md)。
+
+## 7. Agent 美术：agent-art
 
 游戏中大部分特效和部分素材由 Agent 产出，路线是让 Agent 写代码或操作分层工程，而不是直接生成位图，这样结果可编辑、可复现、能用脚本导入 Unity。
 
