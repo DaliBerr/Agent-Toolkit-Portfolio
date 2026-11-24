@@ -7,7 +7,7 @@
 在 Unity 里，`Random.Range` 和 `Debug.Log` 随手就能写出来，人和 Agent 都容易这样写。《苍灵志》对这两类调用有约定：
 
 - **随机数**：须经带种子的 `Vocalith.Random`。它用 PCG32 算法，种子相同、调用顺序相同，输出就相同。这样 Agent 引入的问题可以按种子复现。
-- **日志**：须经统一的 [`Vocalith.GameDebug`](https://github.com/DaliBerr/Lilith-Portfolio/blob/main/Assets/Scripts/Vocalith/Log/GameDebug.cs)。它的方法带 `[Conditional("UNITY_EDITOR")]` 和 `[Conditional("DEVELOPMENT_BUILD")]`，发行包里这些调用会被编译器去掉。
+- **日志**：须经统一的 [`Vocalith.Logging.GameDebug`](https://github.com/DaliBerr/Lilith-Portfolio/blob/main/Assets/Scripts/Vocalith/Log/GameDebug.cs)。它的方法带 `[Conditional("UNITY_EDITOR")]` 和 `[Conditional("DEVELOPMENT_BUILD")]`，发行包里这些调用会被编译器去掉。
 
 这个插件在编辑器里直接检查，不靠人或 Agent 自觉遵守。
 

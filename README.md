@@ -16,7 +16,7 @@
 | [`runtime-automation/`](runtime-automation/) | 运行时自动化协议包（Unity UPM，约 1900 行 C#）、核心测试与协议文档 | 让 Agent 不借助 Computer Use、用结构化状态驱动游戏 |
 | [`editor-guards/`](editor-guards/) | Unity Editor 插件 SystemCallBlocker 与带种子的随机数生成器 | 拦截绕过统一随机数和日志模块的直接调用 |
 | [`balance-lab/`](balance-lab/) | 离线数值实验的方案概述（代码未公开） | 用模拟筛选数值候选，人工批准后才写入游戏 |
-| [`agent-specs/`](agent-specs/) | 敌人 AI 的执行规格与实现日志 | 让实现 Agent 按冻结的目标和验收条件推进 |
+| [`agent-specs/`](agent-specs/) | 敌人 AI 的执行规格与实现日志 | 让负责实现的 Agent 按冻结的目标和验收条件推进 |
 | [`agent-art/`](agent-art/) | Agent 用 pixelfx 编写的特效与敌人动画源码、预览 | 让 Agent 产出可编辑、可复现的像素美术 |
 
 ## 1. 编辑器操作：unity-editor-ops
@@ -66,7 +66,7 @@ python -m unittest tests/test_safety_gates.py
 - **扫描**：每次编译完成后扫描业务脚本，即将进入 Play 模式前再扫描一次。
 - **拦截**：直接调用 `System.Random`、`UnityEngine.Random` 或 `UnityEngine.Debug` 时，在控制台报出规则、文件、行号和替换建议；修正前不能进入 Play 模式。
 - **随机数**：须改用带种子的 [`Vocalith.Random`](editor-guards/Random.cs)（PCG32），这样 Agent 引入的问题可以按种子复现。
-- **日志**：须改用 `Vocalith.GameDebug`，它的调用在发行包里会被编译器去掉。
+- **日志**：须改用 `Vocalith.Logging.GameDebug`，它的调用在发行包里会被编译器去掉。
 
 它和第 2 节的 Prefab 快照、哈希比对规则一起，构成 Agent 改动后的审查关卡。详见 [`editor-guards/README.md`](editor-guards/README.md)。
 
@@ -74,7 +74,7 @@ python -m unittest tests/test_safety_gates.py
 
 目标是让 Demo 达到设定体验：有同类游戏经验的玩家约在第 3–4 次尝试通关，成功一局约 15 分钟。
 
-- **模拟**：实验室模拟两章 13 个战斗房和 2 个 Boss，从上千项可调参数里筛出少量候选。
+- **模拟**：实验室模拟两章 13 个战斗房和 2 个 Boss，在上千项可调参数中搜索，筛出少量候选数值方案。
 - **写入**：候选只写入隔离目录，经人工批准和 Unity 试运行后才会写入资源。
 - **审阅**：方案和实现由两个不同模型的 Agent 交叉审阅。
 
@@ -82,10 +82,10 @@ python -m unittest tests/test_safety_gates.py
 
 ## 6. 执行规格：agent-specs
 
-刷怪、敌人 AI 和房间生成三个系统，都是先写执行规格，再交给实现 Agent：
+刷怪、敌人 AI 和房间生成三个系统，都是先写执行规格，再交给负责实现的 Agent：
 
 - **规格内容**：写明目标、仓库现状、验收条件和禁止事项。
-- **不得改规格**：实现 Agent 不得修改规格，只能更新实现日志。
+- **不得改规格**：负责实现的 Agent 不得修改规格，只能更新实现日志。
 - **遇到冲突**：发现冲突必须停下，写入日志的 Blockers，由我裁决。
 
 这里收录敌人 AI 那份规格和它的实现日志；按规格，六类小兵已经落地。详见 [`agent-specs/README.md`](agent-specs/README.md)。
@@ -94,11 +94,11 @@ python -m unittest tests/test_safety_gates.py
 
 游戏中大部分特效和部分素材由 Agent 产出，路线是让 Agent 写代码或操作分层工程，而不是直接生成位图，这样结果可编辑、可复现、能用脚本导入 Unity。
 
-- [`pixelfx-sources/`](agent-art/pixelfx-sources/)：基于 [pixelfx](https://github.com/patch-gg/pixelfx) 编写的特效源码，包括 18 种元素法术释放、命中、玩家与敌方弹道。
+- [`pixelfx-sources/`](agent-art/pixelfx-sources/)：基于 [pixelfx](https://github.com/patch-gg/pixelfx) 编写的特效源码，包括 18 种法术释放、命中、玩家与敌方弹道。
 - [`pixelfx-enemies/`](agent-art/pixelfx-enemies/)：两种敌人（异形兽、墨团小鬼）的待机、移动、攻击、受击、死亡动画源码。
 - Boss 和部分敌人、草与竹林植被用 [Pixel Loom](https://github.com/yangsir2077/pixel-loom) 的分层工程制作，这里只放预览。
 
-![18 种元素法术释放特效](agent-art/previews/ink-releases.png)
+![18 种法术释放特效](agent-art/previews/ink-releases.png)
 
 ![Boss 四方向九个动作](agent-art/previews/boss-tanxian-4dir.gif)
 
